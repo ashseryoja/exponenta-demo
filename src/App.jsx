@@ -14,6 +14,7 @@ function ProductScene({onReady, intro, spin, reset, interactive}) {
  useEffect(()=>{
   let renderer, model, alive=true, raf, dragging=false, previous=0, dragY=0, gestureTravel=0, flourishStart=-10000, flourishTurns=0, lastReset=0, start=performance.now();
   const el=mount.current;
+  const hero=document.getElementById('home'), taste=document.getElementById('taste');
   try { renderer=new THREE.WebGLRenderer({alpha:true,antialias:true,powerPreference:'high-performance'}); } catch { onReady('error'); return; }
   renderer.setPixelRatio(Math.min(window.devicePixelRatio,1.7)); renderer.setClearColor(0x000000,0); renderer.outputColorSpace=THREE.SRGBColorSpace;
   renderer.toneMapping=THREE.ACESFilmicToneMapping; renderer.toneMappingExposure=1.12;
@@ -59,9 +60,15 @@ function ProductScene({onReady, intro, spin, reset, interactive}) {
    let i=0;while(i<poses.length-2 && sy>poses[i+1].at)i++;
    const a=poses[i],b=poses[i+1],q=THREE.MathUtils.clamp((sy-a.at)/(b.at-a.at),0,1);
    const mix=k=>THREE.MathUtils.lerp(a[k],b[k],q);
-   // Keep the product fully present as the pink taste section begins on mobile;
-   // let it fade only near the end of that section before the lifestyle content.
-   const fade=THREE.MathUtils.smoothstep(sy,small?1.05:2.35,small?2.4:2.8);
+   // Anchor the mobile cup to its reserved space in each section, including when
+   // Safari changes its toolbar height. It scrolls out before the product copy.
+   const mobileCenter=taste.offsetTop+315-window.scrollY;
+   const fade=small?THREE.MathUtils.smoothstep(-mobileCenter,-50,230):THREE.MathUtils.smoothstep(sy,2.35,2.8);
+   if(small){
+    const heroCenter=el.offsetTop+el.clientHeight/2;
+    const transfer=THREE.MathUtils.smoothstep(window.scrollY,hero.clientHeight*.2,hero.clientHeight);
+    el.style.transform=`translateY(${THREE.MathUtils.lerp(heroCenter,mobileCenter,transfer)-heroCenter}px)`;
+   }else el.style.transform='';
    el.style.opacity=1-fade;el.style.pointerEvents=fade>.8?'none':'auto';
    // The interactive region follows the cup; generous bounds avoid clipping during spins.
    const center=50+mix('x')/(2*5.7*Math.tan(THREE.MathUtils.degToRad(16))*(el.clientWidth/el.clientHeight))*100;
@@ -73,16 +80,15 @@ function ProductScene({onReady, intro, spin, reset, interactive}) {
    const entrance=calm?1:1-Math.pow(1-opening,3);
    const tapProgress=THREE.MathUtils.clamp((now-flourishStart)/1350,0,1);
    const tapAngle=flourishTurns-Math.PI*2*(1-(1-Math.pow(1-tapProgress,3)));
-   const tapLift=Math.sin(tapProgress*Math.PI)*.24;
+   const tapLift=Math.sin(tapProgress*Math.PI)*(small?.12:.24);
    if(values.current.spin&&!calm)autoAngle+=dt*.8;
    const idle=calm||dragging?0:1;
    group.position.x=(small?Math.sin(sy*3)*.13:mix('x'))+Math.sin(t*.72)*.065*idle;
-   const mobileTasteLift=small?THREE.MathUtils.smoothstep(sy,.9,1.25)*.55:0;
-   group.position.y=(calm?0:mix('y'))+mobileTasteLift+Math.sin(t*1.45)*.105*idle+tapLift-(1-entrance)*.65;
+   group.position.y=(calm||small?0:mix('y'))+Math.sin(t*1.45)*.075*idle+tapLift-(1-entrance)*.65;
    group.rotation.z=(calm?-.12:mix('z'))+Math.sin(t*.93)*.065*idle+(calm?0:pointer.x*.13);
    group.rotation.x=(calm?0:mix('rx')+pointer.y*.24+Math.sin(t*.67)*.08*idle);
    group.rotation.y=(calm?.12:mix('ry'))+dragY+autoAngle+tapAngle+Math.sin(t*.72)*.28*idle+(calm?0:pointer.x*.42)+(1-entrance)*Math.PI*2;
-   const scale=(small?.92:mix('scale'))*(.58+.42*entrance)*(1+Math.sin(tapProgress*Math.PI)*.07);
+   const scale=(small?(el.clientHeight<430?1:1.06):mix('scale'))*(.58+.42*entrance)*(1+Math.sin(tapProgress*Math.PI)*(small?.035:.07));
    group.scale.setScalar(scale);
    if(fade<.999 || values.current.intro)renderer.render(scene,camera);
   };render();
@@ -108,10 +114,11 @@ export function App(){
   <div className="product-stage">
    {loaded!=='error'&&<ProductScene onReady={setLoaded} intro={intro} spin={spin} reset={reset} interactive={!intro}/>}
    {loaded==='error'&&<div className="model-fallback"><img src={A+'03-lifestyle.webp'} alt="Exponenta HIGH-PRO ազնվամորի–բանան"/><span>Այս դիտարկիչում 3D-ն հասանելի չէ</span></div>}
-   <section id="home" className="hero">
+   <section id="home" className={`hero ${intro?'':'hero-entered'}`}>
     <div className="hero-topline"><span className="edition">ՍՊԻՏԱԿՈՒՑ՝ ՀԱՃՈՒՅՔՈՎ։</span><span className="coordinates">ԵՐԵՎԱՆ, ՀԱՅԱՍՏԱՆ · ԱՄԵՆ ՕՐ</span></div>
-    <div className="hero-heading"><h1><span>ԶԳԱ</span><span>ՔՈ</span><span className="outlined">ՈՒԺԸ։</span></h1><span className="heading-note">ՔՈ ՀԱՄԸ։<br/>ՔՈ ԷՆԵՐԳԻԱՆ։</span></div>
-    <div className="hero-note"><span className="note-line"/><p>Համ, որը ոգեշնչում է։<br/>Սպիտակուց՝ ամեն օրվա համար։</p><a href="#taste" className="round-cta" aria-label="Բացահայտել համը"><ArrowDown size={25}/></a></div>
+    <div className="hero-heading"><h1><span className="hero-first-line"><span>ԶԳԱ</span>{' '}<span>ՔՈ</span></span><span className="hero-power">ՈՒԺԸ։</span></h1><span className="heading-note">ՔՈ ՀԱՄԸ։<br/>ՔՈ ԷՆԵՐԳԻԱՆ։</span></div>
+    <div className="hero-product-backdrop" aria-hidden="true"><div className="hero-disc"/><Sparkle className="hero-spark hero-spark-one" weight="fill"/><Sparkle className="hero-spark hero-spark-two" weight="fill"/><span className="hero-product-tag">HIGH-PRO</span></div>
+    <div className="hero-note"><span className="note-line"/><p>Համ, որը ոգեշնչում է։<br/>{' '}Սպիտակուց՝ ամեն օրվա համար։</p><a href="#taste" className="hero-cta"><span>Բացահայտիր համը</span><ArrowDown size={21}/></a></div>
     <div className="hero-badge"><strong>30<span>գ</span></strong><span>ՍՊԻՏԱԿՈՒՑ<br/>ՄԵԿ ԲԱԺԱԿՈՒՄ</span></div>
     <div className="hero-bottom"><span className="flavor-index">01 / <b>ԱԶՆՎԱՄՈՐԻ — ԲԱՆԱՆ</b></span><span className="drag-hint"><Hand size={17}/> Պտտիր կամ հպվիր</span><span className="scroll-hint">ԹԵՐԹԻՐ։ ԶԳԱ։ <ArrowDown size={15}/></span></div>
    </section>

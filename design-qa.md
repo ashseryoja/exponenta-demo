@@ -1,4 +1,34 @@
-# Exponenta demo — visual and interaction QA
+# Hero redesign QA — 2026-09-21
+
+final result: passed
+
+## Current source and scope
+
+Source before-state: `/var/folders/6j/zzbt25dx4w94qh7jsw7c_7fw0000gn/T/codex-clipboard-03529ec3-f912-40b3-bc9e-386e96cfb79f.png` (1125×2436, includes iOS and Safari chrome, approximately 375 CSS px wide at 3× density). The request is an intentional hero redesign with a readable full headline, not a pixel-for-pixel clone. Brand colors, original GLB, logo, Armenian fonts and copy remain the source.
+
+Implementation: http://127.0.0.1:5173/ . Browser screenshots are inline task artifacts, not saved filesystem files. Source and revised screenshots were emitted together in one comparison input. Reviewed content regions, excluding the source's browser chrome; no exact pixel comparison is claimed. Viewports: 375×667, 390×844 and 1280×720 CSS px at 1× capture density. Full views show headline/product/CTA relationships clearly, so focused crops were unnecessary. DOM bounds supplement the short-screen capture.
+
+## Current findings and iteration history
+
+- [P1, resolved] Original final word was pale and hidden behind the cup. The complete headline now occupies two high-contrast lines above a separate mobile product stage, with a solid pink final word.
+- [P2, resolved] Original mobile CTA fell below Safari's visible content. At 375×667 the new CTA occupies y569–620; the footer hint remains visible and document width equals viewport width.
+- [P2, resolved in the second comparison] Initial short-screen cup placement was too close to the final line. Moved its stage down, reduced the compact scale/height and tap lift. The revised comparison shows clear separation between letters and lid.
+- [P2, resolved] Mobile fading previously depended on viewport multiples. The canvas now transfers to the reserved pink-section product area using real section positions. At the taste anchor in 375×667, opacity is 1, canvas bounds y148–543, and copy begins at y669. A subsequent screenshot shows the cup leaving above the heading without crossing the body text.
+
+## Required visual surfaces and checks
+
+- Typography: retained real Noto Sans Armenian and local Montserrat Armenian, deliberate two-line hero wrapping, readable solid display lettering.
+- Spacing/layout: centered mobile headline, separate cup area, full-width CTA; desktop uses headline/CTA left and cup right. Short/tall phones and desktop inspected.
+- Colors: retained lime, plum and pink; pink circular background, plum protein badge and existing-library SVG accents provide focus.
+- Images: authentic logo and original textured user GLB retained; no emoji or raster substitute for the model.
+- Copy: Armenian content retained; visible CTA is “Բացահայտիր համը”.
+- Interactions: hero CTA navigates to `#taste`; logo returns to hero; model responds to taps and scroll; entry animations observed. Browser error/warning log empty. Production build passes with the existing bundle-size advisory.
+
+Physical iPhone Safari, reduced-motion emulation and WebGL failure were not tested in this pass. The supplied GLB remains 12.6 MB and about 240k triangles.
+
+---
+
+# Earlier QA history (superseded where described above)
 
 final result: passed
 

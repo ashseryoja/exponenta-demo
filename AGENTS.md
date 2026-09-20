@@ -1,5 +1,7 @@
 # Prototype Instructions
 
+Hero feedback: on mobile the complete Armenian headline must be readable above the 3D product, never faint behind it. Give the cup its own visual space, keep the flavor CTA visible, and verify both short Safari-sized and taller phone viewports. Product must stay visible when entering the pink section without crossing its copy. Production also deploys to https://exponenta-demo.vercel.app/ through the repository's Vercel integration.
+
 The public demo is hosted on GitHub Pages at https://ashseryoja.github.io/exponenta-demo/ . Source repository: https://github.com/ashseryoja/exponenta-demo . Deployments build with `VITE_BASE_PATH=/exponenta-demo/`; preserve base-aware asset paths. The interface must remain Armenian, using Noto Sans Armenian Black for headings and Montserrat Armenian for text. Product animation should start immediately with scrolling, plus visible idle and pointer/tap interaction.
 
 Run the local server yourself and open the preview in the browser available to this environment. Do not give the user server-start instructions when you can run it.
