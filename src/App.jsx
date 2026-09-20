@@ -125,7 +125,7 @@ export function App(){
    <section id="taste" className="taste">
     <div className="taste-top"><span>01 — ՀԱՄԻ ՄԱՍԻՆ</span><span>HIGH-PRO ՇԱՐՔ</span></div>
     <div className="taste-copy reveal"><span className="small-label">ԱԶՆՎԱՄՈՐԻ + ԲԱՆԱՆ</span><h2>ՍԵՐ՝ ԱՌԱՋԻՆ<br/><em>ԿՈՒՄԻՑ։</em></h2><p>Բուրավետ ազնվամորի։ Նուրբ բանան։<br/>Քո փոքրիկ համեղ ծեսը՝<br/>ամեն օր։</p><div className="facts"><div><strong>30<small>գ</small></strong><span>սպիտակուց մեկ բաժակում</span></div><div><strong>Առանց</strong><span>ավելացված շաքարի</span></div></div><button className="details-button" onClick={()=>setInfo(!info)} aria-expanded={info}>Ավելին ըմպելիքի մասին {info?<Minus size={20}/>:<Plus size={20}/>}</button>{info&&<div className="product-details">HIGH-PRO · Ազնվամորի–բանան։ Պատրաստի սպիտակուցային ըմպելիք՝ հարմար բաժակով։ 30 գ սպիտակուց մեկ բաժակում։ Առանց ավելացված շաքարի։</div>}<div className="model-controls"><button className={spin?'active':''} onClick={()=>{setSpin(!spin);showModel();}} aria-pressed={spin}><ArrowCounterClockwise size={17}/>{spin?'Կանգնեցնել':'Պտտել 360°'}</button><button onClick={()=>{setReset(v=>v+1);setSpin(false);showModel();}}>Սկզբնական դիրք</button></div></div>
-    <span className="taste-bigword" aria-hidden="true">Ի՜ՆՉ ՀԱՄ։</span><span className="taste-foot">ԼԱՎ ՕՐԸ ՍԿՍՎՈՒՄ Է ՀԱՄԻՑ։</span>
+    <span className="taste-foot">ԼԱՎ ՕՐԸ ՍԿՍՎՈՒՄ Է ՀԱՄԻՑ։</span>
    </section>
   </div>
   <div className="marquee" aria-hidden="true"><div>{Array.from({length:4},(_,i)=><span key={i}>ԱՎԵԼԻ ՀԱՄԵՂ <span className="marquee-star"><Sparkle size="1em" weight="fill" /></span> ԱՎԵԼԻ ՔՈՆԸ <span className="marquee-star"><Sparkle size="1em" weight="fill" /></span> </span>)}</div></div>
