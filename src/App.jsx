@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
 import '@fontsource-variable/noto-sans-armenian';
-import { ArrowUpRight, ArrowDown, ArrowRight, ArrowCounterClockwise, Hand, InstagramLogo, Plus, Minus, Sparkle } from '@phosphor-icons/react';
+import { ArrowUpRight, ArrowDown, ArrowCounterClockwise, Hand, InstagramLogo, Plus, Minus, Sparkle } from '@phosphor-icons/react';
 import * as THREE from 'three';
 import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
 import { RoomEnvironment } from 'three/addons/environments/RoomEnvironment.js';
@@ -99,12 +99,10 @@ function ProductScene({onReady, intro, spin, reset, interactive}) {
 
 export function App(){
  const [loaded,setLoaded]=useState('loading'), [intro,setIntro]=useState(true), [introKey,setIntroKey]=useState(0), [spin,setSpin]=useState(false), [reset,setReset]=useState(0), [info,setInfo]=useState(false), [progress,setProgress]=useState(0);
- const introRef=useRef(null);
  useEffect(()=>{const scroll=()=>{document.documentElement.style.setProperty('--scroll',window.scrollY+'px');const max=document.documentElement.scrollHeight-window.innerHeight;setProgress(max?window.scrollY/max:0);};window.addEventListener('scroll',scroll,{passive:true});scroll();return()=>window.removeEventListener('scroll',scroll);},[]);
- useEffect(()=>{if(!intro)return;document.body.style.overflow='hidden';introRef.current?.focus();const duration=reduced()?300:2900;let timer;if(loaded!=='loading')timer=setTimeout(()=>setIntro(false),duration);const timeout=setTimeout(()=>setIntro(false),10000);return()=>{clearTimeout(timer);clearTimeout(timeout);document.body.style.overflow='';};},[intro,loaded,introKey]);
+ useEffect(()=>{if(!intro)return;document.body.style.overflow='hidden';const duration=reduced()?300:2900;let timer;if(loaded!=='loading')timer=setTimeout(()=>setIntro(false),duration);const timeout=setTimeout(()=>setIntro(false),10000);return()=>{clearTimeout(timer);clearTimeout(timeout);document.body.style.overflow='';};},[intro,loaded,introKey]);
  useEffect(()=>{const obs=new IntersectionObserver(entries=>entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('revealed');}),{threshold:.15});document.querySelectorAll('.reveal').forEach(e=>obs.observe(e));return()=>obs.disconnect();},[]);
  const replay=()=>{window.scrollTo({top:0,behavior:'instant'});setIntroKey(v=>v+1);setIntro(true);};
- const skip=()=>setIntro(false);
  const showModel=()=>{if(innerWidth<760)window.scrollTo({top:0,behavior:'smooth'});};
  return <>
   <a className="skip-link" href="#taste">Անցնել ըմպելիքին</a>
@@ -131,6 +129,6 @@ export function App(){
   <section id="rhythm" className="rhythm"><div className="rhythm-heading reveal"><div><span className="small-label">02 — ՔՈ ՌԻԹՄՈՎ</span><h2>ԱՄԵՆ ՕՐ։<br/><em>ՔՈ ՌԻԹՄՈՎ։</em></h2></div><p>Մարզումից հետո։ Հանդիպումների միջև։<br/>Պարզապես, որովհետև համեղ է։<br/><b>Քո օրվա ամեն պահի համար։</b></p></div><div className="photo-grid"><figure className="photo-card photo-one reveal"><img src={A+'01-pink-fitness.webp'} alt="Exponenta-ի վարդագույն բաժակը՝ մարզական պարագաների կողքին" loading="lazy"/><figcaption><span>01 / ՇԱՐԺՎԻՐ</span><strong>Շարժման մեջ։</strong><ArrowUpRight size={32}/></figcaption></figure><figure className="photo-card photo-two reveal"><img src={A+'03-lifestyle.webp'} alt="Աղջիկը՝ Exponenta ազնվամորի–բանան ըմպելիքով" loading="lazy"/><figcaption><span>02 / ՎԱՅԵԼԻՐ ՊԱՀԸ</span><strong>Քո պահին։</strong><ArrowUpRight size={32}/></figcaption></figure></div></section>
   <section className="closing"><span className="small-label">EXPONENTA ՀԱՅԱՍՏԱՆ</span><h2>ՔՈ ՀԱՋՈՐԴ<br/><em>ՀԱՄԵՂ ՊԱՀԸ։</em></h2><a href="https://www.instagram.com/exponenta.am/" target="_blank" rel="noreferrer" className="instagram-cta"><InstagramLogo size={24}/> @exponenta.am <ArrowUpRight size={25}/></a><footer><span>© EXPONENTA · 2026</span><button onClick={replay}><ArrowCounterClockwise size={16}/> Նորից սկզբից</button><span>ՍՏԵՂԾՎԱԾ Է ՎԱՅԵԼԵԼՈՒ ՀԱՄԱՐ։</span></footer></section>
   </main>
-  <div key={introKey} className={`intro ${intro?'':'intro-exit'}`} aria-hidden={!intro} inert={!intro?true:undefined}><div className="intro-top"><span>EXPONENTA</span><span>ՀԱՅԱՍՏԱՆ</span></div><div className="intro-center"><img className="intro-logo" src={A+'brand-logo.jpg'} alt="Exponenta-ի տարբերանշանը"/><div className="intro-title">EXPONENTA</div><span className="intro-tag">ՔՈ ԱՄԵՆՕՐՅԱ ՀԱՄԵՂ ՊԱՀԸ։</span></div><div className="intro-bottom"><span>{loaded==='loading'?'Պատրաստում ենք քո համեղ օրը…':'Քո նոր մակարդակը։'}</span><button ref={introRef} onClick={skip}>Բաց թողնել <ArrowRight size={16}/></button></div><div className={`intro-meter ${loaded!=='loading'?'complete':''}`}/></div>
+  <div key={introKey} className={`intro ${intro?'':'intro-exit'}`} aria-hidden={!intro} inert={!intro?true:undefined}><div className="intro-top"><span>EXPONENTA</span></div><div className="intro-center"><img className="intro-logo" src={A+'brand-logo.jpg'} alt="Exponenta-ի տարբերանշանը"/><div className="intro-title">EXPONENTA</div><span className="intro-tag">ՔՈ ԱՄԵՆՕՐՅԱ ՀԱՄԵՂ ՊԱՀԸ։</span></div><div className="intro-bottom"><span>{loaded==='loading'?'Պատրաստում ենք քո համեղ օրը…':'Քո նոր մակարդակը։'}</span></div><div className={`intro-meter ${loaded!=='loading'?'complete':''}`}/></div>
  </>;
 }
