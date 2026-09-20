@@ -109,7 +109,7 @@ export function App(){
  return <>
   <a className="skip-link" href="#taste">Անցնել ըմպելիքին</a>
   <div className="reading-progress" style={{transform:`scaleX(${progress})`}} />
-  <header className="header"><a className="brand" href="#home" aria-label="Exponenta — գլխավոր էջ"><img src={A+'brand-logo.jpg'} alt=""/><span>EXPONENTA<span className="brand-sub">ՆՈՐ ՄԱԿԱՐԴԱԿ։ ԱՄԵՆ ՕՐ։</span></span></a><nav aria-label="Նավարկում"><a href="#taste">Բացահայտիր համը</a><a href="#rhythm">Քո ռիթմը</a></nav><a className="social-link" href="https://www.instagram.com/exponenta.am/" target="_blank" rel="noreferrer">Մենք Instagram-ում <ArrowUpRight size={19}/></a></header>
+  <header className="header"><a className="brand" href="#home" aria-label="Exponenta — գլխավոր էջ"><img src={A+'brand-logo.jpg'} alt=""/><span>EXPONENTA</span></a><nav aria-label="Նավարկում"><a href="#taste">Բացահայտիր համը</a><a href="#rhythm">Քո ռիթմը</a></nav><a className="social-link" href="https://www.instagram.com/exponenta.am/" target="_blank" rel="noreferrer">Մենք Instagram-ում <ArrowUpRight size={19}/></a></header>
   <main>
   <div className="product-stage">
    {loaded!=='error'&&<ProductScene onReady={setLoaded} intro={intro} spin={spin} reset={reset} interactive={!intro}/>}
