@@ -77,7 +77,8 @@ function ProductScene({onReady, intro, spin, reset, interactive}) {
    if(values.current.spin&&!calm)autoAngle+=dt*.8;
    const idle=calm||dragging?0:1;
    group.position.x=(small?Math.sin(sy*3)*.13:mix('x'))+Math.sin(t*.72)*.065*idle;
-   group.position.y=(calm?0:mix('y'))+Math.sin(t*1.45)*.105*idle+tapLift-(1-entrance)*.65;
+   const mobileTasteLift=small?THREE.MathUtils.smoothstep(sy,.9,1.25)*.55:0;
+   group.position.y=(calm?0:mix('y'))+mobileTasteLift+Math.sin(t*1.45)*.105*idle+tapLift-(1-entrance)*.65;
    group.rotation.z=(calm?-.12:mix('z'))+Math.sin(t*.93)*.065*idle+(calm?0:pointer.x*.13);
    group.rotation.x=(calm?0:mix('rx')+pointer.y*.24+Math.sin(t*.67)*.08*idle);
    group.rotation.y=(calm?.12:mix('ry'))+dragY+autoAngle+tapAngle+Math.sin(t*.72)*.28*idle+(calm?0:pointer.x*.42)+(1-entrance)*Math.PI*2;
