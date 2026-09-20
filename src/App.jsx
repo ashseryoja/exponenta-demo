@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
 import '@fontsource-variable/noto-sans-armenian';
-import { ArrowUpRight, ArrowDown, ArrowRight, ArrowCounterClockwise, Hand, InstagramLogo, Plus, Minus } from '@phosphor-icons/react';
+import { ArrowUpRight, ArrowDown, ArrowRight, ArrowCounterClockwise, Hand, InstagramLogo, Plus, Minus, Sparkle } from '@phosphor-icons/react';
 import * as THREE from 'three';
 import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
 import { RoomEnvironment } from 'three/addons/environments/RoomEnvironment.js';
@@ -121,7 +121,7 @@ export function App(){
     <span className="taste-bigword" aria-hidden="true">Ի՜ՆՉ ՀԱՄ։</span><span className="taste-foot">ԼԱՎ ՕՐԸ ՍԿՍՎՈՒՄ Է ՀԱՄԻՑ։</span>
    </section>
   </div>
-  <div className="marquee" aria-hidden="true"><div>{Array.from({length:4},(_,i)=><span key={i}>ԱՎԵԼԻ ՀԱՄԵՂ <span className="marquee-star">✳</span> ԱՎԵԼԻ ՔՈՆԸ <span className="marquee-star">✳</span> </span>)}</div></div>
+  <div className="marquee" aria-hidden="true"><div>{Array.from({length:4},(_,i)=><span key={i}>ԱՎԵԼԻ ՀԱՄԵՂ <span className="marquee-star"><Sparkle size="1em" weight="fill" /></span> ԱՎԵԼԻ ՔՈՆԸ <span className="marquee-star"><Sparkle size="1em" weight="fill" /></span> </span>)}</div></div>
   <section id="rhythm" className="rhythm"><div className="rhythm-heading reveal"><div><span className="small-label">02 — ՔՈ ՌԻԹՄՈՎ</span><h2>ԱՄԵՆ ՕՐ։<br/><em>ՔՈ ՌԻԹՄՈՎ։</em></h2></div><p>Մարզումից հետո։ Հանդիպումների միջև։<br/>Պարզապես, որովհետև համեղ է։<br/><b>Քո օրվա ամեն պահի համար։</b></p></div><div className="photo-grid"><figure className="photo-card photo-one reveal"><img src={A+'01-pink-fitness.webp'} alt="Exponenta-ի վարդագույն բաժակը՝ մարզական պարագաների կողքին" loading="lazy"/><figcaption><span>01 / ՇԱՐԺՎԻՐ</span><strong>Շարժման մեջ։</strong><ArrowUpRight size={32}/></figcaption></figure><figure className="photo-card photo-two reveal"><img src={A+'03-lifestyle.webp'} alt="Աղջիկը՝ Exponenta ազնվամորի–բանան ըմպելիքով" loading="lazy"/><figcaption><span>02 / ՎԱՅԵԼԻՐ ՊԱՀԸ</span><strong>Քո պահին։</strong><ArrowUpRight size={32}/></figcaption></figure></div></section>
   <section className="closing"><span className="small-label">EXPONENTA ՀԱՅԱՍՏԱՆ</span><h2>ՔՈ ՀԱՋՈՐԴ<br/><em>ՀԱՄԵՂ ՊԱՀԸ։</em></h2><a href="https://www.instagram.com/exponenta.am/" target="_blank" rel="noreferrer" className="instagram-cta"><InstagramLogo size={24}/> @exponenta.am <ArrowUpRight size={25}/></a><footer><span>© EXPONENTA · 2026</span><button onClick={replay}><ArrowCounterClockwise size={16}/> Նորից սկզբից</button><span>ՍՏԵՂԾՎԱԾ Է ՎԱՅԵԼԵԼՈՒ ՀԱՄԱՐ։</span></footer></section>
   </main>
