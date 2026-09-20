@@ -59,7 +59,9 @@ function ProductScene({onReady, intro, spin, reset, interactive}) {
    let i=0;while(i<poses.length-2 && sy>poses[i+1].at)i++;
    const a=poses[i],b=poses[i+1],q=THREE.MathUtils.clamp((sy-a.at)/(b.at-a.at),0,1);
    const mix=k=>THREE.MathUtils.lerp(a[k],b[k],q);
-   const fade=THREE.MathUtils.smoothstep(sy,small?.86:2.35,small?1.1:2.8);
+   // Keep the product fully present as the pink taste section begins on mobile;
+   // let it fade only near the end of that section before the lifestyle content.
+   const fade=THREE.MathUtils.smoothstep(sy,small?1.05:2.35,small?2.4:2.8);
    el.style.opacity=1-fade;el.style.pointerEvents=fade>.8?'none':'auto';
    // The interactive region follows the cup; generous bounds avoid clipping during spins.
    const center=50+mix('x')/(2*5.7*Math.tan(THREE.MathUtils.degToRad(16))*(el.clientWidth/el.clientHeight))*100;
