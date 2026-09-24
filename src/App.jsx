@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
 import '@fontsource-variable/noto-sans-armenian';
-import { ArrowUpRight, ArrowDown, ArrowCounterClockwise, Hand, InstagramLogo, Plus, Minus, Sparkle } from '@phosphor-icons/react';
+import { ArrowUpRight, ArrowDown, ArrowCounterClockwise, Hand, Plus, Minus, Sparkle } from '@phosphor-icons/react';
 import * as THREE from 'three';
 import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
 import { RoomEnvironment } from 'three/addons/environments/RoomEnvironment.js';
@@ -127,7 +127,7 @@ export function App(){
   </div>
   <div className="marquee" aria-hidden="true"><div>{Array.from({length:4},(_,i)=><span key={i}>ԱՎԵԼԻ ՀԱՄԵՂ <span className="marquee-star"><Sparkle size="1em" weight="fill" /></span> ԱՎԵԼԻ ՔՈՆԸ <span className="marquee-star"><Sparkle size="1em" weight="fill" /></span> </span>)}</div></div>
   <section id="rhythm" className="rhythm"><div className="rhythm-heading reveal"><div><span className="small-label">02 — ՔՈ ՌԻԹՄՈՎ</span><h2>ԱՄԵՆ ՕՐ։<br/><em>ՔՈ ՌԻԹՄՈՎ։</em></h2></div><p>Մարզումից հետո։ Հանդիպումների միջև։<br/>Պարզապես, որովհետև համեղ է։<br/><b>Քո օրվա ամեն պահի համար։</b></p></div><div className="photo-grid"><figure className="photo-card photo-one reveal"><div className="photo-art photo-art-one" aria-hidden="true"><img src={A+'zuno-mark.svg'} alt=""/><span>MOVE / 01</span></div><figcaption><span>01 / ՇԱՐԺՎԻՐ</span><strong>Շարժման մեջ։</strong><ArrowUpRight size={32}/></figcaption></figure><figure className="photo-card photo-two reveal"><div className="photo-art photo-art-two" aria-hidden="true"><div className="photo-art-orb"/><img src={A+'zuno-mark.svg'} alt=""/><span>PAUSE / 02</span></div><figcaption><span>02 / ՎԱՅԵԼԻՐ ՊԱՀԸ</span><strong>Քո պահին։</strong><ArrowUpRight size={32}/></figcaption></figure></div></section>
-  <section className="closing"><span className="small-label">ZUNO CONCEPT</span><h2>ՔՈ ՀԱՋՈՐԴ<br/><em>ՀԱՄԵՂ ՊԱՀԸ։</em></h2><a href="#home" className="instagram-cta"><InstagramLogo size={24}/> Դիտել սկզբից <ArrowUpRight size={25}/></a><footer><span>© ZUNO · 2026</span><button onClick={replay}><ArrowCounterClockwise size={16}/> Նորից սկզբից</button><span>ՍՏԵՂԾՎԱԾ Է ՎԱՅԵԼԵԼՈՒ ՀԱՄԱՐ։</span></footer></section>
+  <section className="closing"><span className="small-label">ZUNO CONCEPT</span><h2>ՔՈ ՀԱՋՈՐԴ<br/><em>ՀԱՄԵՂ ՊԱՀԸ։</em></h2><a href="#home" className="instagram-cta"><Sparkle size={24} weight="fill"/> Դիտել սկզբից <ArrowUpRight size={25}/></a><footer><span>© ZUNO · 2026</span><button onClick={replay}><ArrowCounterClockwise size={16}/> Նորից սկզբից</button><span>ՍՏԵՂԾՎԱԾ Է ՎԱՅԵԼԵԼՈՒ ՀԱՄԱՐ։</span></footer></section>
   </main>
   <div key={introKey} className={`intro ${intro?'':'intro-exit'}`} aria-hidden={!intro} inert={!intro?true:undefined}><div className="intro-top"><span>ZUNO</span></div><div className="intro-center"><img className="intro-logo" src={A+'zuno-mark.svg'} alt="ZUNO-ի նշանը"/><div className="intro-title">ZUNO</div><span className="intro-tag">ՔՈ ԱՄԵՆՕՐՅԱ ՀԱՄԵՂ ՊԱՀԸ։</span></div><div className="intro-bottom"><span>{loaded==='loading'?'Պատրաստում ենք քո համեղ օրը…':'Քո նոր մակարդակը։'}</span></div><div className={`intro-meter ${loaded!=='loading'?'complete':''}`}/></div>
  </>;
