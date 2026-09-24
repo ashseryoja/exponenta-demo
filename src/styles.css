@@ -93,3 +93,19 @@ h1 .outlined{font-family:'Noto Sans Armenian Variable',sans-serif;font-weight:90
  :root{--hero-product-top:270px;--hero-product-height:255px}
  .hero{min-height:660px;padding-top:86px}.header{height:70px}.hero-heading{margin-top:13px}.hero h1{font-size:15.4vw}.hero h1 .hero-power{font-size:21.2vw}.hero-note{bottom:47px}.hero-note p{font-size:9px}
 }
+
+/* ZUNO's original visual cards replace the source-brand lifestyle photography. */
+.photo-art{position:absolute;inset:0;overflow:hidden;display:flex;align-items:center;justify-content:center}
+.photo-art:before,.photo-art:after{content:'';position:absolute;border-radius:999px;pointer-events:none}
+.photo-art-one{background:linear-gradient(145deg,#08b7b3 0%,#08b7b3 42%,#e0f78b 42%,#e0f78b 100%)}
+.photo-art-one:before{width:72%;height:72%;background:#f6accd;right:-20%;top:-13%;transform:rotate(28deg)}
+.photo-art-one:after{width:44%;height:44%;background:#e91b75;left:-13%;bottom:-12%;box-shadow:28px -24px 0 #44132e}
+.photo-art-two{background:linear-gradient(150deg,#f6accd 0%,#f6accd 52%,#44132e 52%,#44132e 100%)}
+.photo-art-two:before{width:75%;height:75%;background:#e0f78b;left:-21%;bottom:-23%}
+.photo-art-two:after{width:34%;height:34%;background:#e91b75;right:9%;top:12%}
+.photo-art-orb{position:absolute;width:55%;aspect-ratio:1;border:2px solid #e0f78b;border-radius:50%;left:23%;top:19%;transform:rotate(-18deg)}
+.photo-art img{position:relative;z-index:2;width:150px;height:150px;object-fit:contain;border-radius:0;filter:drop-shadow(0 18px 20px #44132e35);transform:rotate(-12deg)}
+.photo-art-two img{transform:rotate(12deg);width:132px;height:132px}
+.photo-art>span{position:absolute;z-index:3;left:30px;top:30px;color:#44132e;font-size:11px;letter-spacing:2px;font-weight:800}
+.photo-art-two>span{left:auto;right:30px;color:#e0f78b}
+@media(max-width:759px){.photo-art img{width:120px;height:120px}.photo-art-two img{width:108px;height:108px}.photo-art>span{left:23px;top:23px;font-size:9px}.photo-art-two>span{left:auto;right:23px}}

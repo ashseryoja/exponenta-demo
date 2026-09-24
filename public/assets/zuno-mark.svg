@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" role="img" aria-labelledby="title desc">
+  <title id="title">ZUNO mark</title>
+  <desc id="desc">Abstract orbit mark in turquoise, lime, plum and pink.</desc>
+  <rect width="128" height="128" rx="38" fill="#08B7B3"/>
+  <path d="M38 42c12-10 30-12 43-3 17 12 19 37 6 52-12 14-34 16-49 5" fill="none" stroke="#E0F78B" stroke-linecap="round" stroke-width="11"/>
+  <path d="M42 76c8 7 20 9 30 5 13-5 20-19 17-32" fill="none" stroke="#44132E" stroke-linecap="round" stroke-width="7"/>
+  <circle cx="90" cy="38" r="10" fill="#E91B75"/>
+</svg>
